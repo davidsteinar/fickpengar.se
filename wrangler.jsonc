@@ -1,0 +1,10 @@
+{
+  // Human-friendly name for the worker (optional for Pages, useful for Workers Sites)
+  "name": "fickpengar",
+  // Keep compatibility date current; Cloudflare requires this
+  "compatibility_date": "2025-11-26",
+  // Serve static assets from Vite build output
+  "assets": {
+    "directory": "./dist"
+  }
+}
