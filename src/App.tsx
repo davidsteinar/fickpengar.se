@@ -52,10 +52,15 @@ function App() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-8 min-h-screen flex flex-col">
-      <header className="space-y-2">
-        <h1 className="text-3xl font-bold">Fickpengar efter skatt</h1>
-        <p className="text-muted-foreground text-sm">Intäkt är inte vinst. Se pengaflödet och lär ut verklig lön efter skatt.</p>
-      </header>
+      <div className="space-y-2 text-center mb-8">
+        <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">
+          Räkna ut rättvis <span className="text-emerald-600">Veckopeng</span> & <span className="text-emerald-600">Månadspeng</span>
+        </h1>
+        <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
+          Sluta gissa summor. Använd vår kalkylator för att omvandla jobb till 
+          <span className="font-medium text-slate-700"> verklig lön efter skatt</span>.
+        </p>
+      </div>
       <div className="space-y-6 flex-1">
         <CalculatorForm onFormChange={handleFormChange} formState={formState} />
       </div>
@@ -70,7 +75,7 @@ function App() {
       </div>
       <footer className="mt-12 pt-6 border-t text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} David Steinar Asgrimsson. 
-        <a href="https://github.com/davidsteinar" target="_blank" rel="noopener noreferrer" className="underline ml-1">GitHub</a>
+        <a href="https://github.com/davidsteinar/fickpengar.se" target="_blank" rel="noopener noreferrer" className="underline ml-1">GitHub</a>
       </footer>
     </div>
   )

@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      '@': '/Users/dsa/Projects/fickpengar/src',
+      '@': '/src',
     },
   },
 })

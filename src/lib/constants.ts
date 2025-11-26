@@ -16,11 +16,11 @@ import type { EmployeeRatios, EntrepreneurDefaults } from './types'
 
 export const SWEDISH_EMPLOYEE_DEFAULTS: EmployeeRatios & { discretionaryIncome?: number } = {
   taxPct: 0.32,         // Typical municipal + state tax for average income
-  housingPct: 0.35,     // Housing costs are often 30-40% of net income
+  housingPct: 0.30,     // Housing costs are often 30-40% of net income
   foodPct: 0.13,        // Food is about 12-15% of net income
-  transportPct: 0.08,   // Public transport/car is 7-10%
-  essentialsPct: 0.10,  // Clothing, insurance, phone, etc.
-  discretionaryIncome: 0.02, // Default discretionary income (2%)
+  transportPct: 0.07,   // Public transport/car is 7-10%
+  essentialsPct: 0.07,  // Clothing, insurance, phone, etc.
+  discretionaryIncome: 0.11, // Default discretionary income (11%)
 }
 
 export const SWEDISH_ENTREPRENEUR_DEFAULTS: EntrepreneurDefaults = {

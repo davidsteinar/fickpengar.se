@@ -102,10 +102,10 @@ export function CalculatorForm({ onFormChange, formState }: Props) {
       </div>
       <div className="grid gap-4 md:grid-cols-3">
         <div className="md:col-span-2 space-y-4">
-          <Label>Arbete</Label>
+          <Label>Syssla</Label>
           <Select value={taskName} onValueChange={handleTaskChange}>
             <SelectTrigger>
-              <SelectValue placeholder="Välj arbete" />
+              <SelectValue placeholder="Välj syssla" />
             </SelectTrigger>
             <SelectContent>
               <div className="px-2 py-1 text-xs text-muted-foreground font-semibold">Nivå A (Högst)</div>
