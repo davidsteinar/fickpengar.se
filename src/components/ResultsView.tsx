@@ -2,7 +2,7 @@ import type { CalculationResult } from '../lib/types'
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card'
 import { Button } from './ui/button'
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from './ui/table'
-import { SWEDISH_EMPLOYEE_DEFAULTS } from '../lib/constants'
+ 
 
 // Lightweight tooltip component for explanations.
 function ExplainTooltip({ explanation }: { explanation: string }) {
@@ -66,21 +66,8 @@ interface Props {
   formState?: any
 }
 
-export function ResultsView({ result, onReset, onGeneratePdf, PieChart, formState = {} }: Props) {
-  const taxFraction = formState.empTax ?? SWEDISH_EMPLOYEE_DEFAULTS.taxPct
-  const housingFraction = formState.empHousing ?? 0
-  const foodFraction = formState.empFood ?? 0
-  const transportFraction = formState.empTransport ?? 0
-  const essentialsFraction = formState.empEssentials ?? 0
-  const remainderFraction = Math.max(0, 1 - (taxFraction + housingFraction + foodFraction + transportFraction + essentialsFraction))
-  const sliderPct = {
-    taxes: taxFraction * 100,
-    housing: housingFraction * 100,
-    food: foodFraction * 100,
-    transport: transportFraction * 100,
-    essentials: essentialsFraction * 100,
-    pocket: remainderFraction * 100,
-  }
+export function ResultsView({ result, onReset, onGeneratePdf, PieChart }: Props) {
+  
 
   return (
     <div className="space-y-6">
@@ -307,16 +294,7 @@ export function ResultsView({ result, onReset, onGeneratePdf, PieChart, formStat
                     const transport = result.lines.find(l => l.key === 'transport')
                     const essentials = result.lines.find(l => l.key === 'essentials')
                     const discretionary = result.lines.find(l => l.key === 'discretionary')
-                    const finalProfit = result.lines.find(l => l.key === 'finalProfit') || discretionary
-                    function pct(lineKey: string) {
-                      if (lineKey === 'taxes') return sliderPct.taxes.toFixed(0) + '%'
-                      if (lineKey === 'housing') return sliderPct.housing.toFixed(0) + '%'
-                      if (lineKey === 'food') return sliderPct.food.toFixed(0) + '%'
-                      if (lineKey === 'transport') return sliderPct.transport.toFixed(0) + '%'
-                      if (lineKey === 'essentials') return sliderPct.essentials.toFixed(0) + '%'
-                      if (lineKey === 'discretionary' || lineKey === 'finalProfit') return sliderPct.pocket.toFixed(0) + '%'
-                      return ''
-                    }
+                    
                     const rows: React.ReactNode[] = []
                     if (gross) rows.push(
                       <TableRow key="gross">
