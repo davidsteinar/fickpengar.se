@@ -92,7 +92,8 @@ const SwishQrGenerator: React.FC<SwishQrGeneratorProps> = ({ formState }) => {
       return;
     }
     setError(null);
-    const url = buildSwishUrl(trimmedPhone, amount, taskName);
+    const roundedAmount = Math.round(amount);
+    const url = buildSwishUrl(trimmedPhone, roundedAmount, taskName);
     console.log('Generating Swish QR:', url);
     setQrValue(url);
   };
@@ -184,7 +185,7 @@ const SwishQrGenerator: React.FC<SwishQrGeneratorProps> = ({ formState }) => {
         </div>
         {amount > 0 && (
           <div style={{ marginTop: 10, fontSize: 15, color: '#333' }}>
-            Belopp: <b>{amount.toFixed(2)} kr</b>
+            Belopp: <b>{amount.toFixed(0)} kr</b>
           </div>
         )}
       </div>

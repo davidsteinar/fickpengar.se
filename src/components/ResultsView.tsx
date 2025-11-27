@@ -70,24 +70,24 @@ export function ResultsView({ result, onReset, onGeneratePdf, PieChart }: Props)
   
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">{result.mode === 'employee' ? 'Lönespecifikation' : 'Fakturasammanställning'}</h2>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={onReset}>Börja om</Button>
-          <Button variant="outline" onClick={onGeneratePdf}>Ladda ner PDF</Button>
+    <div className="space-y-6 px-0 sm:px-4 md:px-6">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
+          <Button className="w-full sm:w-auto" variant="outline" onClick={onReset}>Börja om</Button>
         </div>
       </div>
+      <h2 className="text-xl font-semibold">{result.mode === 'employee' ? 'Lönespecifikation' : 'Fakturasammanställning'}</h2>
       <div className="grid gap-6 md:grid-cols-3">
-        <Card className="md:col-span-2">
+        <Card className="md:col-span-2 overflow-hidden sm:rounded-lg">
           <CardHeader>
             <CardTitle>Pengaflödesuppdelning</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-0 sm:px-4">
+            <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-44">Steg</TableHead>
+                  <TableHead className="w-44 hidden sm:table-cell">Steg</TableHead>
                   <TableHead>Post</TableHead>
                   <TableHead className="w-12 text-center" title="Förklaring">
                     <span className="inline-block w-4 h-4 bg-blue-100 text-blue-700 rounded-full text-center font-bold text-xs leading-4 align-middle select-none">?</span>
@@ -112,7 +112,7 @@ export function ResultsView({ result, onReset, onGeneratePdf, PieChart }: Props)
                     // Section 1: VAT flow
                     rows.push(
                       <TableRow key="gross">
-                        <TableCell rowSpan={3} className="align-top font-semibold bg-muted">Momsflöde</TableCell>
+                        <TableCell rowSpan={3} className="align-top font-semibold bg-muted hidden sm:table-cell">Momsflöde</TableCell>
                         <TableCell className="text-left">{ENTREPRENEUR_EXPLANATIONS.gross.label}</TableCell>
                         <TableCell className="text-center group relative">
                           <div className="w-full h-full">
@@ -152,7 +152,7 @@ export function ResultsView({ result, onReset, onGeneratePdf, PieChart }: Props)
                     // Section 2: Taxes & deductions
                     rows.push(
                       <TableRow key="schablonavdrag">
-                        <TableCell rowSpan={5} className="align-top font-semibold bg-muted">Skatter & Avdrag</TableCell>
+                        <TableCell rowSpan={5} className="align-top font-semibold bg-muted hidden sm:table-cell">Skatter & Avdrag</TableCell>
                         <TableCell className="text-left">
                           <div className="flex flex-col">
                             {ENTREPRENEUR_EXPLANATIONS.schablonavdrag.label}
@@ -229,7 +229,7 @@ export function ResultsView({ result, onReset, onGeneratePdf, PieChart }: Props)
                     // Section 3: Living & final profit
                     rows.push(
                       <TableRow key="livingOverhead">
-                        <TableCell rowSpan={2} className="align-top font-semibold bg-muted">Levnad & Vinst</TableCell>
+                        <TableCell rowSpan={2} className="align-top font-semibold bg-muted hidden sm:table-cell">Levnad & Vinst</TableCell>
                         <TableCell className="text-left">{ENTREPRENEUR_EXPLANATIONS.livingOverhead.label}</TableCell>
                         <TableCell className="text-center group relative">
                           <div className="w-full h-full">
@@ -298,7 +298,7 @@ export function ResultsView({ result, onReset, onGeneratePdf, PieChart }: Props)
                     const rows: React.ReactNode[] = []
                     if (gross) rows.push(
                       <TableRow key="gross">
-                        <TableCell rowSpan={1} className="align-top font-semibold bg-muted">Bruttolön</TableCell>
+                        <TableCell rowSpan={1} className="align-top font-semibold bg-muted hidden sm:table-cell">Bruttolön</TableCell>
                         <TableCell className="text-left">{EMPLOYEE_EXPLANATIONS.gross.label}</TableCell>
                         <TableCell className="text-center group relative">
                           <div className="w-full h-full">
@@ -310,7 +310,7 @@ export function ResultsView({ result, onReset, onGeneratePdf, PieChart }: Props)
                     )
                     if (taxes) rows.push(
                       <TableRow key="taxes">
-                        <TableCell rowSpan={1} className="align-top font-semibold bg-muted">Skatt</TableCell>
+                        <TableCell rowSpan={1} className="align-top font-semibold bg-muted hidden sm:table-cell">Skatt</TableCell>
                         <TableCell className="text-left">{EMPLOYEE_EXPLANATIONS.taxes.label}</TableCell>
                         <TableCell className="text-center group relative">
                           <div className="w-full h-full">
@@ -323,7 +323,7 @@ export function ResultsView({ result, onReset, onGeneratePdf, PieChart }: Props)
                     const livingLines = [housing, food, transport, essentials].filter(Boolean)
                     if (livingLines.length) livingLines.forEach((line, idx) => rows.push(
                       <TableRow key={line!.key}>
-                        {idx === 0 && <TableCell rowSpan={livingLines.length} className="align-top font-semibold bg-muted">Levnadskostnader</TableCell>}
+                        {idx === 0 && <TableCell rowSpan={livingLines.length} className="align-top font-semibold bg-muted hidden sm:table-cell">Levnadskostnader</TableCell>}
                         <TableCell className="text-left">{EMPLOYEE_EXPLANATIONS[line!.key]?.label ?? line!.label}</TableCell>
                         <TableCell className="text-center group relative">
                           <div className="w-full h-full">
@@ -335,7 +335,7 @@ export function ResultsView({ result, onReset, onGeneratePdf, PieChart }: Props)
                     ))
                     if (discretionary) rows.push(
                       <TableRow key={discretionary.key}>
-                        <TableCell rowSpan={1} className="align-top font-semibold bg-muted">Fickpengar</TableCell>
+                        <TableCell rowSpan={1} className="align-top font-semibold bg-muted hidden sm:table-cell">Fickpengar</TableCell>
                         <TableCell className="text-left">{EMPLOYEE_EXPLANATIONS.discretionary.label}</TableCell>
                         <TableCell className="text-center group relative">
                           <div className="w-full h-full">
@@ -350,13 +350,14 @@ export function ResultsView({ result, onReset, onGeneratePdf, PieChart }: Props)
                 )}
               </TableBody>
             </Table>
+            </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="sm:rounded-lg">
           <CardHeader>
             <CardTitle>Fördelning</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-0 sm:px-4">
             {PieChart ? <PieChart data={result.chart} /> : <div className="text-muted-foreground text-sm">Cirkeldiagram laddas...</div>}
             <div className="mt-4 flex flex-wrap gap-3 justify-center">
               {result.chart.map((item, idx) => {
@@ -372,6 +373,8 @@ export function ResultsView({ result, onReset, onGeneratePdf, PieChart }: Props)
             </div>
           </CardContent>
         </Card>
+        <Button className="w-full sm:w-auto" variant="outline" onClick={onGeneratePdf}>Ladda ner PDF</Button>
+
       </div>
       {/* <div className="space-y-4">
         <Card>

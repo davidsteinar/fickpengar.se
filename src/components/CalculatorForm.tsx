@@ -131,11 +131,13 @@ export function CalculatorForm({ onFormChange, formState }: Props) {
                   <Input
                     className="bg-background pl-9"
                     id="rate-input"
-                    placeholder="0"
                     step="1"
                     type="number"
-                    value={rate}
-                    onChange={e => onFormChange({ rate: Number(e.target.value) })}
+                    value={rate ?? ''}
+                    onChange={e => {
+                      const val = e.target.value;
+                      onFormChange({ rate: val === '' ? undefined : Number(val) });
+                    }}
                   />
                 </div>
                 <div className="relative w-1/2">
