@@ -1,5 +1,5 @@
 // import * as Tabs from '@radix-ui/react-tabs'
-import { CHORE_TIERS, CHORE_TIER_DEFAULT_RATES, getChoreTier, SWEDISH_EMPLOYEE_DEFAULTS } from '../lib/constants'
+import { CHORE_TIERS, CHORE_TIER_DEFAULT_RATES_EMPLOYEE, CHORE_TIER_DEFAULT_RATES_ENTREPRENEUR, getChoreTier, SWEDISH_EMPLOYEE_DEFAULTS } from '../lib/constants'
 import { Input } from './ui/input'
 import { Clock } from "lucide-react";
 import { Slider } from './ui/slider'
@@ -45,10 +45,26 @@ export function CalculatorForm({ onFormChange, formState }: Props) {
   function handleTaskChange(chore: string) {
     const tier = getChoreTier(chore)
     if (tier) {
-      onFormChange({ taskName: chore, rate: CHORE_TIER_DEFAULT_RATES[tier] })
+      const defaultRate = mode === 'employee'
+        ? CHORE_TIER_DEFAULT_RATES_EMPLOYEE[tier]
+        : CHORE_TIER_DEFAULT_RATES_ENTREPRENEUR[tier]
+      onFormChange({ taskName: chore, rate: defaultRate })
       return
     }
     onFormChange({ taskName: chore })
+  }
+
+  function handleModeChange(newMode: 'employee' | 'entrepreneur') {
+    // When switching modes, set rate based on current task tier if available
+    const tier = taskName ? getChoreTier(taskName) : undefined
+    if (tier) {
+      const defaultRate = newMode === 'employee'
+        ? CHORE_TIER_DEFAULT_RATES_EMPLOYEE[tier]
+        : CHORE_TIER_DEFAULT_RATES_ENTREPRENEUR[tier]
+      onFormChange({ mode: newMode, rate: defaultRate })
+    } else {
+      onFormChange({ mode: newMode })
+    }
   }
 
   return (
@@ -64,7 +80,7 @@ export function CalculatorForm({ onFormChange, formState }: Props) {
               ? 'border-blue-600 bg-blue-50 ring-2 ring-blue-400'
               : 'border-gray-200 bg-gray-50 hover:bg-gray-100'}
           `}
-          onClick={() => onFormChange({ mode: 'employee' })}
+          onClick={() => handleModeChange('employee')}
         >
           <div className="flex items-center gap-2 mb-2">
             <span className="text-xl font-bold">Anställd</span>
@@ -86,7 +102,7 @@ export function CalculatorForm({ onFormChange, formState }: Props) {
               ? 'border-green-600 bg-green-50 ring-2 ring-green-400'
               : 'border-gray-200 bg-gray-50 hover:bg-gray-100'}
           `}
-          onClick={() => onFormChange({ mode: 'entrepreneur' })}
+          onClick={() => handleModeChange('entrepreneur')}
         >
           <div className="flex items-center gap-2 mb-2">
             <span className="text-xl font-bold">Egenföretagare</span>

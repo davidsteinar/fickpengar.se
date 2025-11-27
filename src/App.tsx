@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SWEDISH_EMPLOYEE_DEFAULTS, SWEDISH_ENTREPRENEUR_DEFAULTS, CHORE_TIER_DEFAULT_RATES, getChoreTier, CHORE_TIERS } from './lib/constants'
+import { SWEDISH_EMPLOYEE_DEFAULTS, SWEDISH_ENTREPRENEUR_DEFAULTS, CHORE_TIER_DEFAULT_RATES_EMPLOYEE, getChoreTier, CHORE_TIERS } from './lib/constants'
 import './App.css'
 import { CalculatorForm } from './components/CalculatorForm'
 import { EmployeeMode } from './components/EmployeeMode'
@@ -13,7 +13,7 @@ function App() {
   const [formState, setFormState] = useState({
     mode: 'employee',
     taskName: defaultChore,
-    rate: CHORE_TIER_DEFAULT_RATES[defaultTier],
+    rate: CHORE_TIER_DEFAULT_RATES_EMPLOYEE[defaultTier],
     hours: 1.0,
     empTax: SWEDISH_EMPLOYEE_DEFAULTS.taxPct,
     empHousing: SWEDISH_EMPLOYEE_DEFAULTS.housingPct,
@@ -35,7 +35,7 @@ function App() {
     setFormState({
       mode: 'employee',
       taskName: defaultChore,
-      rate: CHORE_TIER_DEFAULT_RATES[defaultTier],
+      rate: CHORE_TIER_DEFAULT_RATES_EMPLOYEE[defaultTier],
       hours: 1.0,
       empTax: SWEDISH_EMPLOYEE_DEFAULTS.taxPct,
       empHousing: SWEDISH_EMPLOYEE_DEFAULTS.housingPct,

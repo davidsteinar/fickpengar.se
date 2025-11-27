@@ -1,8 +1,14 @@
-// Default hourly rates per chore tier (example values, adjust as needed)
-export const CHORE_TIER_DEFAULT_RATES: Record<string, number> = {
-  A: 250,
+// Default hourly rates per chore tier, per mode
+export const CHORE_TIER_DEFAULT_RATES_EMPLOYEE: Record<string, number> = {
+  A: 170,
   B: 120,
-  C: 60,
+  C: 80,
+}
+
+export const CHORE_TIER_DEFAULT_RATES_ENTREPRENEUR: Record<string, number> = {
+  A: 500,
+  B: 360,
+  C: 0,
 }
 
 // Helper to get tier for a given chore
