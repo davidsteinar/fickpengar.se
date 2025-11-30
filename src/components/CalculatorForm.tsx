@@ -75,6 +75,7 @@ export function CalculatorForm({ onFormChange, formState }: Props) {
         <button
           type="button"
           aria-pressed={mode==='employee'}
+          aria-label="Välj läge: Anställd"
           className={`flex-1 p-6 rounded-xl border-4 text-left transition-all duration-150 shadow-md relative group
             ${mode==='employee'
               ? 'border-blue-600 bg-blue-50 ring-2 ring-blue-400'
@@ -97,6 +98,7 @@ export function CalculatorForm({ onFormChange, formState }: Props) {
         <button
           type="button"
           aria-pressed={mode==='entrepreneur'}
+          aria-label="Välj läge: Egenföretagare"
           className={`flex-1 p-6 rounded-xl border-4 text-left transition-all duration-150 shadow-md relative group
             ${mode==='entrepreneur'
               ? 'border-green-600 bg-green-50 ring-2 ring-green-400'

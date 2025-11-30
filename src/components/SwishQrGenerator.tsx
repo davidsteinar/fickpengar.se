@@ -146,6 +146,7 @@ const SwishQrGenerator: React.FC<SwishQrGeneratorProps> = ({ formState }) => {
             boxShadow: '0 2px 8px 0 rgba(0,0,0,0.06)',
             transition: 'background 0.2s',
           }}
+          aria-label={`Generera Swish QR kod för ${Math.round(amount)} kronor`}
         >
           Generera QR kod
         </button>
